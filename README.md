@@ -1,4 +1,4 @@
-# topic_assigner
+# topic_assigner.py
 
 Assigns unique selections to students (or anything) based on specified prioritized choices. Uses a random seed method to determine priority among duplicate entries of the same priority.
 
