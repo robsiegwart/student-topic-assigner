@@ -132,9 +132,9 @@ def run(filename,iterations,unassigned,save):
             print('\nCriteria met at iteration {}\n'.format(i+1))
             print(df)
             print('\n')
-            print('Number of first choices assigned: '.ljust(40),rv[0])
-            print('Number of second choices assigned: '.ljust(40),rv[1])
-            print('Number of third choices assigned: '.ljust(40),rv[2])
+            print('Number of first choices assigned: '.ljust(40),rv[0],' ({}%)'.format(round(100*rv[0]/sum(rv)),1))
+            print('Number of second choices assigned: '.ljust(40),rv[1],' ({}%)'.format(round(100*rv[1]/sum(rv)),1))
+            print('Number of third choices assigned: '.ljust(40),rv[2],' ({}%)'.format(round(100*rv[2]/sum(rv)),1))
             print('Number of unassigned: '.ljust(40),um)
             print('\n')
             

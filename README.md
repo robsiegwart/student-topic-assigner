@@ -56,25 +56,25 @@ Issuing `python topic_assigner.py --iterations=10 "Sample Data.xlsx"` results in
 
 
 
-[======------------------------------------------------------] 10.0% ...
-Criteria met at iteration 2
+[==================------------------------------------------] 30.0% ...
+Criteria met at iteration 4
 
      Name      Selection  Choice
-8  Audrey   South Africa       2
-4   Ellen        England       1
+8  Audrey         Russia       1
+0   Ellen        England       1
 1   Jacob         France       1
-3  Jeremy          Spain       1
-9     Jim         Mexico       1
-2     Joe        Germany       1
-0    John         Brazil       1
-7    Mary        Croatia       2
-5   Penny         Russia       2
-6     Sue  United States       2
+5  Jeremy        Germany       2
+6     Jim         Mexico       1
+9     Joe    New Zealand       3
+2    John         Brazil       1
+4    Mary        Croatia       2
+3   Penny          Spain       1
+7     Sue  United States       2
 
 
-Number of first choices assigned:        6
-Number of second choices assigned:       4
-Number of third choices assigned:        0
+Number of first choices assigned:        6  (60%)
+Number of second choices assigned:       3  (30%)
+Number of third choices assigned:        1  (10%)
 Number of unassigned:                    0
 ```
 
