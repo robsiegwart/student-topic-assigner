@@ -1,36 +1,37 @@
 '''
     Title:          Student Topic Asssigner
     Author:         Rob Siegwart
-    Date:           1/9/2019
-    Description:    Assigns unique selections of topics to students based on
+    Date:           January 2020
+    Description:    Assigns unique selections of choices to students based on
                     their selected preferences.
                     
-                    Uses random seeding to determine
-                    priority and does not enforce logical rules.
+                    Uses random seeding to determine priority and does not
+                    enforce logical rules.
                     
-                    The program may be run several times to obtain different outcomes.
+                    The program may be run several times to obtain different
+                    outcomes.
 
-                    Because it uses random seeding some sequencing does not produce
-                    a valid solution.
+                    Because it uses random seeding some sequencing does not
+                    produce a valid solution.
 
+                    A --save option is included which will save the results
+                    to a file. The filename is [filename]_assigned.xlsx and
+                    is put in the same directory as the input file. It also
+                    appends a number to avoid overwriting existing results
+                    so the program may be rerun to obtain additional
+                    solutions while keeping existing solutions.
 
-                    The saved file name is [filename]_assigned.xlsx and is put in the same directory as 
-                    the input file. It also appends a digit to avoid overwriting existing results
-                    so the program may be rerun to obtain additional solutions while keeping
-                    existing solutions.
-
-                    Input data is an excel file (.xlsx) with the student name followed by choices:
+                    The input data file is an excel file (.xlsx) with the
+                    first column as the name/assignee and the columns to
+                    the right the choices:
 
                     Name   | 1st Choice   | 2nd Choice | ...
                     ------ | ------------ | ---------- |
                     Joe    | Mexico       | Austrailia | ...
                     Mary   | Portugal     | Iceland    | ...
 
-                    The only column name that is expected is 'Name'. The columns to the right of it
-                    are assumed to be the choice entries in decreasing priority from left to right.
-
-                    As many or as little choices may be added for each student and do not have to be
-                    the same number.
+                    As many or as little choices may be added for each student
+                    and do not have to be the same number.
 '''
 
 import os
@@ -51,15 +52,17 @@ def print_header(w=80):
 @click.argument('filename')
 @click.option('--iterations', default=1, help='Specify how may iterations are to be run. Default is 1.')
 @click.option('--unassigned', default=0, help='Specify the maximum number of unassigned students. Default is 0.')
-@click.option('--save', default=False, is_flag=True, help='Choose whether to save the result to a file. Default is False.')
-def run(filename, iterations, unassigned, save):
+@click.option('--save', default=False, is_flag=True, help='Flag to choose whether to save the result to a file.')
+def main(filename, iterations, unassigned, save):
     '''
     Assign topics to students based on priority until the number of unassigned
     students is equal to or less than the value 'unassigned' (defaults to 0). 
     '''
-    data = pd.read_excel(filename,index_col='Name')
+    data = pd.read_excel(filename)
+    name_col = data.columns[0]
+    data.set_index(name_col,inplace=True)
     choice_cols = data.columns
-
+    
     def assign():
         '''
         Assign choices sequentially with a random seed to determine priority.
@@ -97,7 +100,7 @@ def run(filename, iterations, unassigned, save):
         choice = list(map(lambda x: x[1], assigned.values()))
 
         # Create an output dataframe
-        pd_data = { 'Name': list(assigned.keys()), 'Selection': selections, 'Choice': choice }
+        pd_data = { name_col: list(assigned.keys()), 'Selection': selections, 'Choice': choice }
         df = pd.DataFrame(pd_data)
         num_unassigned = len(df[df.Selection == '<< None >>'])
 
@@ -105,7 +108,7 @@ def run(filename, iterations, unassigned, save):
 
     # Print information to console
     print_header()
-    print('  Processing input file "{}"'.format(filename))
+    print('  Processing file "{}"'.format(filename))
     if unassigned == 0:
         print('  Trying for solutions with no unassigned students.')
     else:
@@ -123,15 +126,15 @@ def run(filename, iterations, unassigned, save):
 
         if um <= unassigned:
             # Sort the results by name
-            df.sort_values(by='Name',inplace=True)
+            df.sort_values(by=name_col,inplace=True)
 
-            print('\nCriteria met at iteration {}\n'.format(i+1))
+            print('\n\nCriteria met at iteration {}\n'.format(i+1))
             print(df)
             print('\n')
-            print('Number of first choices assigned: '.ljust(40),rv[0],' ({}%)'.format(round(100*rv[0]/sum(rv)),1))
-            print('Number of second choices assigned: '.ljust(40),rv[1],' ({}%)'.format(round(100*rv[1]/sum(rv)),1))
-            print('Number of third choices assigned: '.ljust(40),rv[2],' ({}%)'.format(round(100*rv[2]/sum(rv)),1))
-            print('Number of unassigned: '.ljust(40),um)
+            print('First choices assigned: '.ljust(40),rv[0],' ({}%)'.format(round(100*rv[0]/sum(rv)),1))
+            print('Second choices assigned: '.ljust(40),rv[1],' ({}%)'.format(round(100*rv[1]/sum(rv)),1))
+            print('Third choices assigned: '.ljust(40),rv[2],' ({}%)'.format(round(100*rv[2]/sum(rv)),1))
+            print('Unassigned: '.ljust(40),um)
             print('\n')
             
             if save:
@@ -155,21 +158,18 @@ def run(filename, iterations, unassigned, save):
     print('\n\n\n')
 
 
-def progress(count, total, status=''):
+def progress(count, total):
     '''
     Display a progress bar.
     
-    Credit: https://gist.github.com/vladignatyev/06860ec2040cb497f0f3
+    Based on: https://gist.github.com/vladignatyev/06860ec2040cb497f0f3
     '''
     bar_len = 60
     filled_len = int(round(bar_len * count / float(total)))
-
-    percents = round(100.0 * count / float(total), 1)
     bar = '=' * filled_len + '-' * (bar_len - filled_len)
-
-    sys.stdout.write('[%s] %s%s ...%s\r' % (bar, percents, '%', status))
+    sys.stdout.write('[{}] {}{}\r'.format(bar, 'iteration ', count))
     sys.stdout.flush()
 
 
 if __name__ == '__main__':
-    run()
+    main()
