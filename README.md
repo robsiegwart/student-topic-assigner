@@ -20,8 +20,20 @@ Options are:
 
     --iterations    int     Specify how may iterations are to be run. Default is 1.
     --unassigned    int     Specify the maximum number of unassigned students. Default is 0.
-    --save          bool    Choose whether to save the result to a file Default is False.
+    --save          bool    Choose whether to save the result to a file. Default is False.
 
+## Usage
+
+```
+$ topic_assigner.py [OPTIONS] FILENAME
+```
+
+```
+Options:
+  --iterations INTEGER  Specify how may iterations are to be run. Default is 1.
+  --unassigned INTEGER  Specify the maximum number of unassigned students. Default is 0.
+  --save                Choose whether to save the result to a file. Default is False.
+```
 
 ## Example
 
@@ -29,16 +41,16 @@ Options are:
 
 Name     | First Choice   | Second Choice    | Third Choice   |
 -------- | -------------- | ---------------- | -------------- |
-Joe      | Germany	      | France	         |  New Zealand   |
-Mary     | France	      | Croatia	         |  Mexico        |
-Ellen    | England	      | Philipines	     |  Russia        |
-Jeremy   | Spain	      | Germany	         |                |
-John     | Brazil	      | New Zealand	     |  Germany       |
-Sue      | Germany	      | United States	 |  South Africa  |
-Jacob    | France	      | Mexico	         |  England       |
-Jim	     | Mexico	      | Brazil	         |                |
-Penny    | Spain	      | Russia	         |  France        |
-Audrey	 | Russia	      | South Africa	 |  Austrailia    |
+Joe      | Germany        | France           |  New Zealand   |
+Mary     | France         | Croatia          |  Mexico        |
+Ellen    | England        | Philipines       |  Russia        |
+Jeremy   | Spain          | Germany          |                |
+John     | Brazil         | New Zealand      |  Germany       |
+Sue      | Germany        | United States    |  South Africa  |
+Jacob    | France         | Mexico           |  England       |
+Jim      | Mexico         | Brazil           |                |
+Penny    | Spain          | Russia           |  France        |
+Audrey   | Russia         | South Africa     |  Austrailia    |
 
 
 Issuing `python topic_assigner.py --iterations=10 "Sample Data.xlsx"` results in the following:

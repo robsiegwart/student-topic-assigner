@@ -12,6 +12,25 @@
 
                     Because it uses random seeding some sequencing does not produce
                     a valid solution.
+
+
+                    The saved file name is [filename]_assigned.xlsx and is put in the same directory as 
+                    the input file. It also appends a digit to avoid overwriting existing results
+                    so the program may be rerun to obtain additional solutions while keeping
+                    existing solutions.
+
+                    Input data is an excel file (.xlsx) with the student name followed by choices:
+
+                    Name   | 1st Choice   | 2nd Choice | ...
+                    ------ | ------------ | ---------- |
+                    Joe    | Mexico       | Austrailia | ...
+                    Mary   | Portugal     | Iceland    | ...
+
+                    The only column name that is expected is 'Name'. The columns to the right of it
+                    are assumed to be the choice entries in decreasing priority from left to right.
+
+                    As many or as little choices may be added for each student and do not have to be
+                    the same number.
 '''
 
 import os
@@ -30,36 +49,13 @@ def print_header(w=80):
 
 @click.command()
 @click.argument('filename')
-@click.option('--iterations', default=1)
-@click.option('--unassigned', default=0)
-@click.option('--save', default=False, is_flag=True)
-def run(filename,iterations,unassigned,save):
+@click.option('--iterations', default=1, help='Specify how may iterations are to be run. Default is 1.')
+@click.option('--unassigned', default=0, help='Specify the maximum number of unassigned students. Default is 0.')
+@click.option('--save', default=False, is_flag=True, help='Choose whether to save the result to a file. Default is False.')
+def run(filename, iterations, unassigned, save):
     '''
-    Assign topics until a level of unassigned students is equal to or less than
-    the value 'unassigned' (defaults to 0).
-
-    Options:
-        --iterations    int     Specify how may iterations are to be run. Default is 1.
-        --unassigned    int     Specify the maximum number of unassigned students. Default is 0.
-        --save          bool    Choose whether to save the result to a file Default is False.
-
-    The saved file name is [filename]_assigned.xlsx and is put in the same directory as 
-    the input file. It also appends a digit to avoid overwriting existing results
-    so the program may be rerun to obtain additional solutions while keeping
-    existing solutions.
-
-    Input data is an excel file (.xlsx) with the student name followed by choices:
-
-    Name   | 1st Choice   | 2nd Choice | ...
-    ------ | ------------ | ---------- |
-    Joe    | Mexico       | Austrailia | ...
-    Mary   | Portugal     | Iceland    | ...
-
-    The only column name that is expected is 'Name'. The columns to the right of it
-    are assumed to be the choice entries in decreasing priority from left to right.
-
-    As many or as little choices may be added for each student and do not have to be
-    the same number.
+    Assign topics to students based on priority until the number of unassigned
+    students is equal to or less than the value 'unassigned' (defaults to 0). 
     '''
     data = pd.read_excel(filename,index_col='Name')
     choice_cols = data.columns
