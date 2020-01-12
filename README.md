@@ -16,11 +16,6 @@ Options to the program are the number of iterations to perform and the maximum p
 
 Then, the program randomizes the dataset and assigns choices sequentially through the list with high to low priority of selections. Thus, it does not optimize for any criteria (e.g. everyone has at least 2nd choice) but simply returns the first result. Different outcomes can be obtained by re-running the program.
 
-Options are:
-
-    --iterations    int     Specify how may iterations are to be run. Default is 1.
-    --unassigned    int     Specify the maximum number of unassigned students. Default is 0.
-    --save          bool    Choose whether to save the result to a file. Default is False.
 
 ## Usage
 
