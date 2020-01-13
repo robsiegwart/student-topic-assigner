@@ -1,6 +1,6 @@
 # topic_assigner.py
 
-Assigns unique selections to students (or anything) based on specified prioritized choices. The method used is via a random seed to determine priority among duplicate entries of the same priority. Thus, the program first randomsizes the rows in the table and then assignes choices sequentially from person to person and from highest to lowest priority, avoiding dupplicates.
+Assigns unique selections to students (or anything) based on specified prioritized choices. The method used is via a random seed to determine priority among duplicate entries of the same priority. Thus, the program first randomizes the rows in the table and then assignes choices sequentially from person to person and from highest to lowest priority, avoiding dupplicates.
 
 Input data is stored in an excel file using the following format:
 
