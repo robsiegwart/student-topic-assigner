@@ -6,9 +6,10 @@ Input data is stored in an excel file using the following format:
 
 Name   | First Choice   | Second Choice | ...  |
 ------ | -------------- | ------------- | ---- |
-Joe    | Mexico         | Belgium       | ...  |
-Mary   | France         | Mexico        | ...  |
-Frank  | Netherlands    | France        | ...  |
+[Name] | [Option]       | [Option]      | ...  |
+[Name] | [Option]       | [Option]      | ...  |
+  ...  | ...            | ...           | ...  |
+
 
 Column names are irrelevent. The only convention is that the first column is the Name/Student and the following columns to the right are the choices with priority given left to right (leftmost is highest priority).
 
