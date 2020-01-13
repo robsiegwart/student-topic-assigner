@@ -40,14 +40,6 @@ import pandas as pd
 import click
 
 
-def print_header(w=80):
-    print('\n')
-    print('-'*w)
-    print('Student Topic Assigner'.center(w))
-    print('-'*w)
-    print('\n')
-
-
 @click.command()
 @click.argument('filename')
 @click.option('--iterations', default=1, help='Specify how may iterations are to be run. Default is 1.')
@@ -63,6 +55,8 @@ def main(filename, iterations, unassigned, save):
     data.set_index(name_col,inplace=True)
     choice_cols = data.columns
     
+    s = 's' if iterations > 1 else ''
+
     def assign():
         '''
         Assign choices sequentially with a random seed to determine priority.
@@ -107,19 +101,29 @@ def main(filename, iterations, unassigned, save):
         return df,rank_vector,num_unassigned
 
     # Print information to console
-    print_header()
+    # Header
+    print('\n')
+    print('-'*80)
+    print('Student Topic Assigner'.center(80))
+    print('-'*80)
+    print('\n')
+
+    # Problem description
     print('  Processing file "{}"'.format(filename))
-    if unassigned == 0:
-        print('  Trying for solutions with no unassigned students.')
-    else:
+    if unassigned:
         print('  Trying for solutions with {} or less unassigned students.'.format(unassigned))
-    print('  Performing up to {} iterations.'.format(iterations))
+    else:
+        print('  Trying for solutions with no unassigned students.')
+    if iterations != 1:
+        print('  Performing up to {} iterations.'.format(iterations))
+    else:
+        print('  Performing 1 iteration.')
     if save:
         print('  Result if found will be saved to a file.')
     print('\n\n')
 
 
-    for i in range(iterations):
+    for i in range(1,iterations+1):
         if iterations > 1:
             progress(i,iterations)
         df,rv,um = assign()
@@ -127,8 +131,7 @@ def main(filename, iterations, unassigned, save):
         if um <= unassigned:
             # Sort the results by name
             df.sort_values(by=name_col,inplace=True)
-
-            print('\n\nCriteria met at iteration {}\n'.format(i+1))
+            print('\n\nCriteria met at iteration{} {}\n'.format(s,i))
             print(df)
             print('\n')
             print('First choices assigned: '.ljust(40),rv[0],' ({}%)'.format(round(100*rv[0]/sum(rv)),1))
@@ -153,7 +156,7 @@ def main(filename, iterations, unassigned, save):
             
             return
     
-    print('\n\nCriteria not met after {} iterations.\n'.format(iterations))
+    print('\n\nCriteria not met after {} iteration{}.\n'.format(iterations,s))
     print(' End '.center(80,'-'))
     print('\n\n\n')
 

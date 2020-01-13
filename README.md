@@ -63,7 +63,7 @@ Issuing `python topic_assigner.py "Sample Data.xlsx" --iterations=10` results in
 
 
 
-[========================------------------------------------] iteration 4
+[========================------------------------------------] iteration 5
 
 Criteria met at iteration 5
 
