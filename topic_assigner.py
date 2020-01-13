@@ -131,7 +131,7 @@ def main(filename, iterations, unassigned, save):
         if um <= unassigned:
             # Sort the results by name
             df.sort_values(by=name_col,inplace=True)
-            print('\n\nCriteria met at iteration{} {}\n'.format(s,i))
+            print('\n\nCriteria met at iteration {}\n'.format(i))
             print(df)
             print('\n')
             print('First choices assigned: '.ljust(40),rv[0],' ({}%)'.format(round(100*rv[0]/sum(rv)),1))
