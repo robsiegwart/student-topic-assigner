@@ -4,11 +4,11 @@ Assigns unique selections to students (or anything) based on specified prioritiz
 
 Input data is stored in an excel file using the following format:
 
-Name   | First Choice   | Second Choice | ...  |
------- | -------------- | ------------- | ---- |
-[Name] | [Option]       | [Option]      | ...  |
-[Name] | [Option]       | [Option]      | ...  |
-  ...  | ...            | ...           | ...  |
+Name   | First Choice   | Second Choice | Third Choice  |
+------ | -------------- | ------------- | ------------- |
+[Name] | [Option]       | [Option]      | [Option]      |
+[Name] | [Option]       | [Option]      | ...           |
+  ...  | ...            | ...           | ...           |
 
 
 Column names are irrelevent. The only convention is that the first column is the Name/Student and the following columns to the right are the choices with priority given left to right (leftmost is highest priority).
