@@ -88,3 +88,8 @@ Unassigned:                              0
 ```
 
 Of course, running the program again will likely yield a different result as numerous solutions exist for this dataset.
+
+## Dependencies
+
+ - click
+ - pandas
