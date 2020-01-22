@@ -134,10 +134,12 @@ def main(filename, iterations, unassigned, save):
             print('\n\nCriteria met at iteration {}\n'.format(i))
             print(df)
             print('\n')
-            print('First choices assigned: '.ljust(40),rv[0],' ({}%)'.format(round(100*rv[0]/sum(rv)),1))
-            print('Second choices assigned: '.ljust(40),rv[1],' ({}%)'.format(round(100*rv[1]/sum(rv)),1))
-            print('Third choices assigned: '.ljust(40),rv[2],' ({}%)'.format(round(100*rv[2]/sum(rv)),1))
-            print('Unassigned: '.ljust(40),um)
+            w = 30
+            print('First choices assigned:'.ljust(w), rv[0], ' ({}%)'.format(round(100*rv[0]/sum(rv)),1))
+            print('Second choices assigned:'.ljust(w), rv[1], ' ({}%)'.format(round(100*rv[1]/sum(rv)),1))
+            print('Third choices assigned:'.ljust(w), rv[2], ' ({}%)'.format(round(100*rv[2]/sum(rv)),1),'\n')
+            print('Unassigned students:'.ljust(w), um)
+            print('Quality factor (>=1):'.ljust(w), round((rv[0]+2*rv[1]+3*rv[2])/len(df),1))
             print('\n')
             
             if save:
@@ -152,13 +154,17 @@ def main(filename, iterations, unassigned, save):
                 print('Result saved to file "{}"\n\n\n'.format(out_fn))
 
                 print(' End '.center(80,'-'))
-                print('\n\n\n')
+                print('\n')
             
-            return
+            break
     
-    print('\n\nCriteria not met after {} iteration{}.\n'.format(iterations,s))
-    print(' End '.center(80,'-'))
-    print('\n\n\n')
+    if um > unassigned:
+        print('\n')
+        print('  No valid solutions found.\n\n')
+        return
+    else:
+        print(' End '.center(80,'-'))
+        print('\n')
 
 
 def progress(count, total):
