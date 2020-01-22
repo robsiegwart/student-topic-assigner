@@ -64,27 +64,32 @@ Issuing `python topic_assigner.py "Sample Data.xlsx" --iterations=10` results in
 
 
 
-[========================------------------------------------] iteration 5
+[==============================------------------------------] iteration 5
 
 Criteria met at iteration 5
 
      Name      Selection  Choice
-8  Audrey   South Africa       2
-7   Ellen        England       1
-2   Jacob         France       1
-0  Jeremy          Spain       1
-9     Jim         Mexico       1
-1     Joe        Germany       1
-6    John         Brazil       1
-3    Mary        Croatia       2
-5   Penny         Russia       2
-4     Sue  United States       2
+7  Audrey         Russia       1
+2   Ellen        England       1
+5   Jacob         France       1
+1  Jeremy        Germany       2
+3     Jim         Mexico       1
+9     Joe    New Zealand       3
+4    John         Brazil       1
+6    Mary        Croatia       2
+0   Penny          Spain       1
+8     Sue  United States       2
 
 
-First choices assigned:                  6  (60%)
-Second choices assigned:                 4  (40%)
-Third choices assigned:                  0  (0%)
-Unassigned:                              0
+First choices assigned:        6  (60%)
+Second choices assigned:       3  (30%)
+Third choices assigned:        1  (10%)
+
+Unassigned students:           0
+Quality factor (>=1):          1.5
+
+
+------------------------------------- End --------------------------------------
 ```
 
 Of course, running the program again will likely yield a different result as numerous solutions exist for this dataset.
