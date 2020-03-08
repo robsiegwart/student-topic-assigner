@@ -1,37 +1,52 @@
+# MIT License
+# 
+# Copyright (c) 2020 Rob Siegwart
+# 
+# Permission is hereby granted, free of charge, to any person obtaining a copy
+# of this software and associated documentation files (the "Software"), to deal
+# in the Software without restriction, including without limitation the rights
+# to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+# copies of the Software, and to permit persons to whom the Software is
+# furnished to do so, subject to the following conditions:
+# 
+# The above copyright notice and this permission notice shall be included in all
+# copies or substantial portions of the Software.
+# 
+# THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+# IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+# FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+# AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+# LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+# OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+# SOFTWARE.
+
 '''
-    Title:          Student Topic Asssigner
-    Author:         Rob Siegwart
-    Date:           January 2020
-    Description:    Assigns unique selections of choices to students based on
-                    their selected preferences.
-                    
-                    Uses random seeding to determine priority and does not
-                    enforce logical rules.
-                    
-                    The program may be run several times to obtain different
-                    outcomes.
+Assigns unique selections of choices to students based on their selected
+preferences.
 
-                    Because it uses random seeding some sequencing does not
-                    produce a valid solution.
+Uses random seeding to determine priority and does not enforce logical
+rules.
 
-                    A --save option is included which will save the results
-                    to a file. The filename is [filename]_assigned.xlsx and
-                    is put in the same directory as the input file. It also
-                    appends a number to avoid overwriting existing results
-                    so the program may be rerun to obtain additional
-                    solutions while keeping existing solutions.
+The program may be run several times to obtain different outcomes.
 
-                    The input data file is an excel file (.xlsx) with the
-                    first column as the name/assignee and the columns to
-                    the right the choices:
+Because it uses random seeding some sequencing does not produce a valid
+solution.
 
-                    Name   | 1st Choice   | 2nd Choice | ...
-                    ------ | ------------ | ---------- |
-                    Joe    | Mexico       | Austrailia | ...
-                    Mary   | Portugal     | Iceland    | ...
+A --save option is included which will save the results to a file. The filename
+is [filename]_assigned.xlsx and is put in the same directory as the input file.
+It also appends a number to avoid overwriting existing results so the program
+may be rerun to obtain additional solutions while keeping existing solutions.
 
-                    As many or as little choices may be added for each student
-                    and do not have to be the same number.
+The input data file is an excel file (.xlsx) with the first column as the
+name/assignee and the columns to the right the choices:
+
+Name   | 1st Choice   | 2nd Choice | ...
+------ | ------------ | ---------- |
+Joe    | Mexico       | Austrailia | ...
+Mary   | Portugal     | Iceland    | ...
+
+As many or as little choices may be added for each student and do not have
+to be the same number.
 '''
 
 import os
